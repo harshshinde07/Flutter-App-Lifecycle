@@ -10,29 +10,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
-
-  AppLifecycleState _appLifecycleState;
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addObserver(this);
-    super.initState();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    setState(() {
-      _appLifecycleState = state;
-    });
-    if(state == AppLifecycleState.paused) {
-      print('AppLifecycleState state: Paused video playback');
-    }
-    if(state == AppLifecycleState.resumed) {
-      print('AppLifecycleState state: Resumed video playback');
-    }
-    print('AppLifecycleState state:  $state');
-  }
+class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +28,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                   'Orientation: $orientation',
                 ),
                 SizedBox(height: 8.0,),
-                Text(
-                  'Previous app state: $_appLifecycleState',
-                ),
-                SizedBox(height: 8.0,),
                 ElevatedButton(
                   child: Text('Navigate to new route'),
                   onPressed: () {
@@ -63,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                       ),
                     );
                   },
-                )
+                ),
               ],
             ),
           );
@@ -72,10 +46,5 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     );
   }
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
 }
 
